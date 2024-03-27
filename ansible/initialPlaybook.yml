@@ -1,0 +1,5 @@
+---
+# This will be the initial Ansible Configuration for our Goland Web
+
+- name: Initial configuration
+  
