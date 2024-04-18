@@ -19,6 +19,19 @@ RUN pip3 install --upgrade pip; \
     pip3 install "ansible==${ANSIBLE_VERSION}"; \
     pip3 install ansible
 
-ENTRYPOINT [ "/dockerweb/ansible/run-playbook.sh" ]
+RUN mkdir -p /dockerweb
+
+COPY ansible /dockerweb/ansible
+COPY golandWeb /dockerweb/golandWeb
+COPY variables.sh /dockerweb/
+
+RUN chmod +x /dockerweb/ansible/run-playbook.sh
+RUN ./dockerweb/ansible/run-playbook.sh
+
+EXPOSE 8080
+
+CMD ["go run /dockerweb/golandWeb/cmd/web/main.go"]
+
+# ENTRYPOINT [ "/dockerweb/ansible/run-playbook.sh" ]
 # CMD [ "/dockerweb/ansible/run-playbook.sh" ] ["tail -f /dev/null"]
 
