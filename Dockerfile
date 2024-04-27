@@ -26,12 +26,12 @@ COPY golandWeb /dockerweb/golandWeb
 COPY variables.sh /dockerweb/
 
 RUN chmod +x /dockerweb/ansible/run-playbook.sh
-RUN ./dockerweb/ansible/run-playbook.sh
+# RUN ./dockerweb/ansible/run-playbook.sh
 
 EXPOSE 8080
 
-CMD ["go run /dockerweb/golandWeb/cmd/web/main.go"]
+# CMD ["go run /dockerweb/golandWeb/cmd/web/main.go"]
 
-# ENTRYPOINT [ "/dockerweb/ansible/run-playbook.sh" ]
+ENTRYPOINT [ "/dockerweb/ansible/run-playbook.sh" ]
 # CMD [ "/dockerweb/ansible/run-playbook.sh" ] ["tail -f /dev/null"]
 
